@@ -65,4 +65,8 @@ func _unhandled_key_input(event: InputEventKey):
 		get_viewport().set_input_as_handled()
 
 func add_variable(variable: String, value):
+	if value is Object:
+		push_error("The value can be non-Object only.")
+		return
+
 	data[variable] = value
