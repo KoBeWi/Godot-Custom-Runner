@@ -7,5 +7,3 @@ func _ready():
 		add_child(level)
 		var pos = CustomRunner.get_variable("mouse_pos")
 		$Player.position = pos
-	else:
-		print("notr")
