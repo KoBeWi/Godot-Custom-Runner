@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "EditorPlugin",
+"class": "CustomRunner",
+"language": "GDScript",
+"path": "res://addons/LevelRunner/LevelRunner.gd"
+}, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://Level.gd"
+} ]
+_global_script_class_icons={
+"CustomRunner": "",
+"Level": ""
+}
+
+[application]
+
+config/name="Plugin Example"
+run/main_scene="res://Welcome.tscn"
+
+[display]
+
+window/dpi/allow_hidpi=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/LevelRunner/plugin.cfg" )

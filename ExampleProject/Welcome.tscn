@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="Welcome" type="Label"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "How to test it:
+1. Open any Level scene
+2. Place the cursor somewhere within the camera bounds
+3. Press F7
+
+The Game scene opens, adds the choosen level as child
+and places the \"player\" sprite at the cursor position from editor."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
