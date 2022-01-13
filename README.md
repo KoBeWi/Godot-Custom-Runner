@@ -10,7 +10,7 @@ This is basically it. The CustomRunner will run a specific scene in your project
 ### Configuration
 
 First you need to configure the plugin. Open "addons/CustomRunner/CustomRunner.gd" and just edit it following the comments. Here are the important bits:
-`const SHORTCUT = KEY_F7` - This is the key that will be used to run the project. If you press F7 (by default), the plugin will run the scene you provided it and pass some data.
+`const SHORTCUT = KEY_F7` - This is the key that will be used to run the project. If you press <kbd>F7</kbd> (by default), the plugin will run the scene you provided it and pass some data.
 
 `func _can_play_scene(scene: Node) -> bool:` - This method will determine whether the current scene can be used to run the plugin. Example implementation:
 ```GDScript
@@ -30,7 +30,7 @@ func _get_game_scene(for_scene: Node) -> String:
 	return "res://Scenes/Game.tscn"
  ```
  
- With the example code above, pressing F7 when you have a scene opened that has Level root node will run `Game.tscn` scene and pass `scene` variable with file path of your level and `pos` with cursor position at the time of running. This is what happens in the GIF above.
+ With the example code above, pressing <kbd>F7</kbd> when you have a scene opened that has Level root node will run `Game.tscn` scene and pass `scene` variable with file path of your level and `pos` with cursor position at the time of running. This is what happens in the GIF above.
  
  ### Retrieving the data
  
