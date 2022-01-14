@@ -1,5 +1,5 @@
 tool
-extends EditorPlugin
+extends Node
 class_name CustomRunner
 
 ### Modify constants/methods to your needs.
@@ -30,22 +30,21 @@ static func is_custom_running() -> bool:
 
 ## Retrieves passed variable value.
 static func get_variable(variable: String):
+	assert(is_custom_running(), "Can't retrieve data if not running via plugin.")
 	var data: Dictionary = str2var(OS.get_environment("__run_data__"))
-	if data.empty():
-		push_error("Run data not found.")
-	else:
-		return data[variable]
+	return data[variable]
 
 ### Unimportant stuff
 
+var plugin: Node
 var data: Dictionary
 
 func _unhandled_key_input(event: InputEventKey):
-	if get_editor_interface().is_playing_scene():
+	if plugin.get_editor_interface().is_playing_scene():
 		return
 	
 	if event.pressed and event.scancode == SHORTCUT:
-		var root := get_editor_interface().get_edited_scene_root()
+		var root: Node = plugin.get_editor_interface().get_edited_scene_root()
 		if not _can_play_scene(root):
 			push_warning("Invalid scene to play.")
 			return
@@ -59,7 +58,7 @@ func _unhandled_key_input(event: InputEventKey):
 			game_scene = root.filename
 		
 		OS.set_environment("__run_data__", var2str(data))
-		get_editor_interface().play_custom_scene(game_scene)
+		plugin.get_editor_interface().play_custom_scene(game_scene)
 		OS.set_environment("__run_data__", "")
 		
 		get_viewport().set_input_as_handled()

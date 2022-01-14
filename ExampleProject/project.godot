@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "EditorPlugin",
+"base": "Node",
 "class": "CustomRunner",
 "language": "GDScript",
-"path": "res://addons/LevelRunner/LevelRunner.gd"
+"path": "res://addons/CustomRunner/CustomRunner.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
@@ -35,4 +35,4 @@ window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/LevelRunner/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/CustomRunner/plugin.cfg" )
