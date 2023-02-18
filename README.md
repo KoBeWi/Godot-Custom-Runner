@@ -50,6 +50,10 @@ func _ready():
 ```
 You can test it in action in the example project.
 
+### Quick Run
+
+If you used Custom Runner at least once in the editor session, you can repeat the last custom run command by using <kbd>Shift</kbd> with the run shortcut (i.e. <kbd>Shift + F7</kbd> by default). Useful when you want to test a specific scene multiple times.
+
 ___
 You can find all my addons on my [profile page](https://github.com/KoBeWi).
 

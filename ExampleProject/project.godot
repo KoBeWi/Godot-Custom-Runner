@@ -8,22 +8,6 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Node",
-"class": &"CustomRunner",
-"language": &"GDScript",
-"path": "res://addons/CustomRunner/CustomRunner.gd"
-}, {
-"base": "Node2D",
-"class": &"Level",
-"language": &"GDScript",
-"path": "res://Level.gd"
-}]
-_global_script_class_icons={
-"CustomRunner": "",
-"Level": ""
-}
-
 [application]
 
 config/name="Plugin Example"
