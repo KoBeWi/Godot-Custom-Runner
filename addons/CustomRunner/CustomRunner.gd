@@ -2,10 +2,10 @@
 extends Node
 class_name CustomRunner
 
-## Custom Runner main script. You can modify methods starting with _ to your needs.
+## Custom Runner main script. You can customize it by modifying the Config.gd file.
 
 ## The shortcut that will trigger the plugin.
-const SHORTCUT = KEY_F7
+var SHORTCUT = KEY_F7
 
 ## If true, pressing the shortcut will invoke CustomRunner for that scene.
 func _can_play_scene(scene: Node) -> bool:

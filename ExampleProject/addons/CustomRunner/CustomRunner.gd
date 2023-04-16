@@ -2,14 +2,14 @@
 extends Node
 class_name CustomRunner
 
-## Custom Runner main script. You can modify methods starting with _ to your needs.
+## Custom Runner main script. You can customize it by modifying the Config.gd file.
 
 ## The shortcut that will trigger the plugin.
-const SHORTCUT = KEY_F7
+var SHORTCUT = KEY_F7
 
 ## If true, pressing the shortcut will invoke CustomRunner for that scene.
 func _can_play_scene(scene: Node) -> bool:
-	return scene is Level
+	return true
 
 ## Add variables that will be passed to the game.
 ## Variable "scene", containing currently opened scene's path, is added automatically.
@@ -19,7 +19,7 @@ func _gather_variables(scene: Node):
 ## Return the path of the "game" scene of your project (i.e. main gameplay scene).
 ## If you return empty string, the current scene will play instead.
 func _get_game_scene(for_scene: Node) -> String:
-	return "res://Game.tscn"
+	return ""
 
 ## Returns true if the game was ran via CustomRunner.
 static func is_custom_running() -> bool:
