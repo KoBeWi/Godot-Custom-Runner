@@ -9,8 +9,8 @@ This is basically it. The CustomRunner will run a specific scene in your project
 
 ### Configuration
 
-First you need to configure the plugin. Open "addons/CustomRunner/CustomRunner.gd" and just edit it following the comments. Here are the important bits:
-`const SHORTCUT = KEY_F7` - This is the key that will be used to run the project. If you press <kbd>F7</kbd> (by default), the plugin will run the scene you provided it and pass some data.
+First you need to configure the plugin. Open "addons/CustomRunner/Config.gd" and just edit it following the comments. Here's more detailed explaination:
+`SHORTCUT = KEY_F7` - This is the key that will be used to run the project. If you press <kbd>F7</kbd> (by default), the plugin will run the scene you provided it and pass some data.
 
 `func _can_play_scene(scene: Node) -> bool:` - This method will determine whether the current scene can be used to run the plugin. Example implementation:
 ```GDScript
