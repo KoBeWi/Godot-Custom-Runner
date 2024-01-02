@@ -55,6 +55,12 @@ You can test it in action in the example project.
 If you used Custom Runner at least once in the editor session, you can repeat the last custom run command by using <kbd>Shift</kbd> with the run shortcut (i.e. <kbd>Shift + F7</kbd> by default). Useful when you want to test a specific scene multiple times.
 
 ___
+
+ The plugin works well with my [Metroidvania System](https://github.com/KoBeWi/Metroidvania-System) addon:
+![](https://github.com/KoBeWi/Metroidvania-System/raw/master/Media/GameCustomRunner.gif)
+The integration guide is included in the README.
+
+___
 You can find all my addons on my [profile page](https://github.com/KoBeWi).
 
 <a href='https://ko-fi.com/W7W7AD4W4' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
