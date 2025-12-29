@@ -1,15 +1,13 @@
 @tool
-extends Node
 class_name CustomRunner
 
 ## Custom Runner main script. You can customize it by modifying the Config.gd file.
 
-## The shortcut that will trigger the plugin.
-var SHORTCUT = KEY_F7
-
 const _DATA_ENV = "__custom_runner_data__"
 
 static var _runtime_data: Dictionary
+
+signal _add_variable(variable: String, value: Variant)
 
 ## If true, pressing the shortcut will invoke CustomRunner for that scene.
 func _can_play_scene(scene: Node) -> bool:
@@ -34,47 +32,13 @@ static func get_variable(variable: String, default: Variant = null) -> Variant:
 	assert(is_custom_running(), "Can't retrieve data if not running via plugin.")
 	if _runtime_data.is_empty():
 		_runtime_data = str_to_var(OS.get_environment(_DATA_ENV))
-	
+
 	return _runtime_data.get(variable, default)
 
-var plugin: Node
-var data: Dictionary
-var prev_game_scene: String
-
-func _unhandled_key_input(event: InputEvent):
-	if plugin.get_editor_interface().is_playing_scene():
-		return
-	
-	if event is InputEventKey and event.pressed and event.keycode == SHORTCUT:
-		if event.shift_pressed:
-			if data.is_empty() or prev_game_scene.is_empty():
-				push_warning("CustomRunner: Can't do Quick Run before running mormally at least once.")
-				return
-		else:
-			var root: Node = plugin.get_editor_interface().get_edited_scene_root()
-			if not _can_play_scene(root):
-				push_warning("CustomRunner: Invalid scene to play.")
-				return
-			
-			data.clear()
-			add_variable("scene", root.scene_file_path)
-			_gather_variables(root)
-			
-			var game_scene := _get_game_scene(root)
-			if game_scene.is_empty():
-				game_scene = root.scene_file_path
-			
-			prev_game_scene = game_scene
-		
-		OS.set_environment(_DATA_ENV, var_to_str(data))
-		plugin.get_editor_interface().play_custom_scene(prev_game_scene) # tu można sygnał
-		OS.set_environment(_DATA_ENV, "")
-		get_viewport().set_input_as_handled()
-
 ## Adds a variable to be passed to the running game. Use in [method _gather_variables].
-func add_variable(variable: String, value):
+func add_variable(variable: String, value: Variant) -> void:
 	if value is Object:
-		push_error("The value can be non-Object only.")
+		push_error("The value can't be an Object.")
 		return
 	
-	data[variable] = value
+	_add_variable.emit(variable, value)
