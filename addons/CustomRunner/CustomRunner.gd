@@ -7,6 +7,10 @@ class_name CustomRunner
 ## The shortcut that will trigger the plugin.
 var SHORTCUT = KEY_F7
 
+const _DATA_ENV = "__custom_runner_data__"
+
+static var _runtime_data: Dictionary
+
 ## If true, pressing the shortcut will invoke CustomRunner for that scene.
 func _can_play_scene(scene: Node) -> bool:
 	return true
@@ -23,13 +27,15 @@ func _get_game_scene(for_scene: Node) -> String:
 
 ## Returns true if the game was ran via CustomRunner.
 static func is_custom_running() -> bool:
-	return not OS.get_environment("__custom_runner_data__").is_empty()
+	return not OS.get_environment(_DATA_ENV).is_empty()
 
 ## Retrieves a passed variable's value.
-static func get_variable(variable: String):
+static func get_variable(variable: String, default: Variant = null) -> Variant:
 	assert(is_custom_running(), "Can't retrieve data if not running via plugin.")
-	var data: Dictionary = str_to_var(OS.get_environment("__custom_runner_data__"))
-	return data[variable]
+	if _runtime_data.is_empty():
+		_runtime_data = str_to_var(OS.get_environment(_DATA_ENV))
+	
+	return _runtime_data.get(variable, default)
 
 var plugin: Node
 var data: Dictionary
@@ -60,9 +66,9 @@ func _unhandled_key_input(event: InputEvent):
 			
 			prev_game_scene = game_scene
 		
-		OS.set_environment("__custom_runner_data__", var_to_str(data))
-		plugin.get_editor_interface().play_custom_scene(prev_game_scene)
-		OS.set_environment("__custom_runner_data__", "")
+		OS.set_environment(_DATA_ENV, var_to_str(data))
+		plugin.get_editor_interface().play_custom_scene(prev_game_scene) # tu można sygnał
+		OS.set_environment(_DATA_ENV, "")
 		get_viewport().set_input_as_handled()
 
 ## Adds a variable to be passed to the running game. Use in [method _gather_variables].
