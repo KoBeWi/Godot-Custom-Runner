@@ -45,6 +45,8 @@ func _get_game_scene(for_scene: Node) -> String:
  ```
  
  With the example code above, pressing the run shortcut when you have a scene opened that has Level root node will run `Game.tscn` scene and pass `scene` variable with file path of your level and `mouse_pos` with cursor position at the time of running. This is what happens in the video above.
+
+ The shortcuts mentioned before can be configured in Editor Settings' Shortcuts tab, under Custom Runner group.
  
  ### Retrieving the data
  
@@ -66,6 +68,8 @@ func _ready():
 ### Example project
 
 The repository includes an example project, used in the video at the beginning. You can use it to test the plugin in action and as a reference for configuring it.
+
+The CustomRunner class also comes with a documentation for its methods.
 
 ___
 
