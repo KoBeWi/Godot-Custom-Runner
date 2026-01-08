@@ -1,4 +1,3 @@
-@tool
 class_name CustomRunner
 
 ## Custom Runner main script. You can customize it by modifying the Config.gd file.
@@ -6,6 +5,8 @@ class_name CustomRunner
 const _DATA_ENV = "__custom_runner_data__"
 
 static var _runtime_data: Dictionary
+
+var _click_position: Vector2
 
 signal _add_variable(variable: String, value: Variant)
 
@@ -22,6 +23,11 @@ func _gather_variables(scene: Node):
 ## If you return empty string, the current scene will play instead.
 func _get_game_scene(for_scene: Node) -> String:
 	return ""
+
+## Returns the position of the cursror at the time when the shortcut was pressed or when using context menu option.
+## Returns infinite vector if the position couldn't be determined.
+func get_click_position() -> Vector2:
+	return _click_position
 
 ## Returns true if the game was ran via CustomRunner.
 static func is_custom_running() -> bool:

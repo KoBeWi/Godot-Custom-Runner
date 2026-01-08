@@ -13,8 +13,8 @@ var data: Dictionary
 var prev_game_scene: String
 
 func _enter_tree():
-	
 	context = ContextMenuPlugin.new()
+	context.plugin = self
 	add_context_menu_plugin(EditorContextMenuPlugin.CONTEXT_SLOT_2D_EDITOR, context)
 	
 	var make_shortcut := func(name: String, key: int) -> Shortcut:
@@ -86,7 +86,6 @@ func initialize_default_runner():
 func initialize_runner(new_runner: CustomRunner):
 	runner = new_runner
 	runner._add_variable.connect(func(variable: String, value: Variant): data[variable] = value)
-	context.runner = runner
 
 func update_settings():
 	if ProjectSettings.check_changed_settings_in_group(CONFIG_SETTING):
@@ -104,6 +103,7 @@ func _shortcut_input(event: InputEvent) -> void:
 		return
 	
 	if EditorInterface.get_editor_settings().is_shortcut(PLAY_SHORTCUT, k):
+		update_click_position()
 		play_scene(false)
 		get_viewport().set_input_as_handled()
 	elif EditorInterface.get_editor_settings().is_shortcut(REPLAY_SHORTCUT, k):
@@ -135,11 +135,41 @@ func play_scene(keep_data: bool) -> void:
 	EditorInterface.play_custom_scene(prev_game_scene)
 	OS.set_environment("__custom_runner_data__", "")
 
+func update_click_position() -> void:
+	if EditorInterface.get_edited_scene_root() is CanvasItem:
+		runner._click_position = EditorInterface.get_edited_scene_root().get_global_mouse_position()
+	else:
+		runner._click_position = Vector2.INF
+
 class ContextMenuPlugin extends EditorContextMenuPlugin:
-	var runner: CustomRunner
+	var plugin: EditorPlugin
 	
 	func _popup_menu(paths: PackedStringArray) -> void:
-		add_context_menu_item("Play Here", play, EditorInterface.get_editor_theme().get_icon(&"Play", &"EditorIcons"))
+		if plugin.runner._can_play_scene(EditorInterface.get_edited_scene_root()):
+			add_context_menu_item("Play Here", play, EditorInterface.get_editor_theme().get_icon(&"Play", &"EditorIcons"))
+	
+	func get_position_from_popup() -> Vector2:
+		var editor: Node = Engine.get_main_loop().root
+		editor = editor.find_child("*CanvasItemEditor*", true, false)
+		if not editor:
+			return Vector2.INF
+		
+		var popup := editor.find_child("*SnapDialog*", false, false)
+		if not popup:
+			return Vector2.INF
+		popup = popup.get_parent().get_child(popup.get_index(true) + 2, true)
+		if not popup:
+			return Vector2.INF
+		
+		var pos: Vector2 = Vector2(popup.position) - editor.get_screen_position() - Vector2(0, 36)
+		pos = EditorInterface.get_edited_scene_root().get_viewport().global_canvas_transform.affine_inverse() * pos
+		return pos
 	
 	func play(whatevers):
-		runner.play_scene(false)
+		var popup_pos := get_position_from_popup()
+		if popup_pos.is_finite():
+			plugin.runner._click_position = popup_pos
+		else:
+			plugin.update_click_position()
+		
+		plugin.play_scene(false)
