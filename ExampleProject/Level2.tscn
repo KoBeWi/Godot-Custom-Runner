@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://rye02pgicf3t"]
+[gd_scene format=3 uid="uid://rye02pgicf3t"]
 
-[ext_resource type="Script" path="res://Level.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dxo1fs2vcadu5" path="res://icon.png" id="2"]
+[ext_resource type="Script" uid="uid://cwn4qux8mswtr" path="res://ExampleProject/Level.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dxo1fs2vcadu5" path="res://ExampleProject/icon.png" id="2"]
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1")

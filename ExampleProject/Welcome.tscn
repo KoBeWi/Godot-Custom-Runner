@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://1tnhxhqen4vt"]
 
-[node name="Welcome" type="Label"]
+[node name="Welcome" type="Label" unique_id=1820863725]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
