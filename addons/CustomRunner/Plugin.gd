@@ -1,5 +1,5 @@
 @tool
-extends EditorPlugin
+extends "ExtendedEditorPlugin.gd"
 
 var context: EditorContextMenuPlugin
 
@@ -12,28 +12,16 @@ var runner: CustomRunner
 var data: Dictionary
 var prev_game_scene: String
 
+func _init() -> void:
+	add_plugin_translations_from_directory("res://addons/CustomRunner/Translations")
+
 func _enter_tree():
 	context = ContextMenuPlugin.new()
 	context.plugin = self
 	add_context_menu_plugin(EditorContextMenuPlugin.CONTEXT_SLOT_2D_EDITOR, context)
 	
-	var make_shortcut := func(name: String, key: int) -> Shortcut:
-		var event := InputEventKey.new()
-		event.keycode = key
-		
-		var shortcut := Shortcut.new()
-		shortcut.resource_name = name
-		shortcut.events.append(event)
-		return shortcut
-	
-	var settings := EditorInterface.get_editor_settings()
-	if not settings.has_shortcut(PLAY_SHORTCUT):
-		settings.add_shortcut(PLAY_SHORTCUT, make_shortcut.call("Play Custom Scene", KEY_F7))
-	if not settings.has_shortcut(REPLAY_SHORTCUT):
-		settings.add_shortcut(REPLAY_SHORTCUT, make_shortcut.call("Replay Custom Scene", KEY_MASK_SHIFT | KEY_F7))
-	
-	if not ProjectSettings.has_setting(CONFIG_SETTING):
-		ProjectSettings.set_setting(CONFIG_SETTING, DEFAULT_CONFIG)
+	register_editor_shortcut("custom_runner/play", tr_extract.tr("Play Custom Scene"), KEY_F7)
+	register_editor_shortcut("custom_runner/replay_last", tr_extract.tr("Replay Custom Scene"), KEY_MASK_SHIFT | KEY_F7)
 	
 	var extensions: PackedStringArray
 	for ext in ResourceLoader.get_recognized_extensions_for_type("Script"):
@@ -41,15 +29,8 @@ func _enter_tree():
 			continue
 		extensions.append("*.%s;Script File" % ext)
 	
-	ProjectSettings.set_initial_value(CONFIG_SETTING, DEFAULT_CONFIG)
-	ProjectSettings.add_property_info({
-		"name": CONFIG_SETTING,
-		"type": TYPE_STRING,
-		"hint": PROPERTY_HINT_FILE_PATH,
-		"hint_string": ",".join(extensions),
-	})
-	
-	ProjectSettings.settings_changed.connect(update_settings)
+	define_project_setting(CONFIG_SETTING, DEFAULT_CONFIG, PROPERTY_HINT_FILE_PATH, ",".join(extensions))
+	track_project_setting(CONFIG_SETTING)
 	
 	load_runner()
 
@@ -113,12 +94,12 @@ func _shortcut_input(event: InputEvent) -> void:
 func play_scene(keep_data: bool) -> void:
 	if keep_data:
 		if data.is_empty() or prev_game_scene.is_empty():
-			EditorInterface.get_editor_toaster().push_toast("CustomRunner: Can't do Quick Run before running mormally at least once.", EditorToaster.SEVERITY_WARNING)
+			EditorInterface.get_editor_toaster().push_toast(tr("CustomRunner: Can't replay scene before running it normally at least once."), EditorToaster.SEVERITY_WARNING)
 			return
 	else:
 		var root: Node = EditorInterface.get_edited_scene_root()
 		if not runner._can_play_scene(root):
-			EditorInterface.get_editor_toaster().push_toast("CustomRunner: Invalid scene to play.")
+			EditorInterface.get_editor_toaster().push_toast(tr("CustomRunner: Invalid scene to play."))
 			return
 		
 		data.clear()
@@ -146,7 +127,7 @@ class ContextMenuPlugin extends EditorContextMenuPlugin:
 	
 	func _popup_menu(paths: PackedStringArray) -> void:
 		if plugin.runner._can_play_scene(EditorInterface.get_edited_scene_root()):
-			add_context_menu_item("Play Here", play, EditorInterface.get_editor_theme().get_icon(&"Play", &"EditorIcons"))
+			add_context_menu_item(plugin.tr_extract.tr("Play Here"), play, EditorInterface.get_editor_theme().get_icon(&"Play", &"EditorIcons"))
 	
 	func get_position_from_popup() -> Vector2:
 		var editor: Node = Engine.get_main_loop().root
