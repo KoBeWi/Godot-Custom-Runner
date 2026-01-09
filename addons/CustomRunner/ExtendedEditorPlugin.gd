@@ -32,7 +32,7 @@ func register_editor_shortcut(path: String, shortcut_name: String, default: int)
 	if default & KEY_MASK_ALT:
 		event.alt_pressed = true
 	
-	event.keycode = default & ~KEY_MODIFIER_MASK
+	event.keycode = default & KEY_CODE_MASK
 	
 	var shortcut := Shortcut.new()
 	shortcut.resource_name = shortcut_name
