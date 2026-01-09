@@ -68,7 +68,7 @@ func _check_settings():
 		if ProjectSettings.check_changed_settings_in_group(setting):
 			_on_setting_changed(setting)
 
-func _on_setting_changed(setting: StringName):
+func _on_setting_changed(setting: String):
 	pass
 
 func _notification(what: int) -> void:

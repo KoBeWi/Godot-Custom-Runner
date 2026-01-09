@@ -68,9 +68,8 @@ func initialize_runner(new_runner: CustomRunner):
 	runner = new_runner
 	runner._add_variable.connect(func(variable: String, value: Variant): data[variable] = value)
 
-func update_settings():
-	if ProjectSettings.check_changed_settings_in_group(CONFIG_SETTING):
-		load_runner()
+func _on_setting_changed(setting: String):
+	load_runner()
 
 func _exit_tree() -> void:
 	remove_context_menu_plugin(context)
