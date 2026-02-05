@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpv0gxik3m0dj"]
 
 [ext_resource type="Script" uid="uid://c74fcscl1xnpw" path="res://ExampleProject/Game.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dxo1fs2vcadu5" path="res://ExampleProject/icon.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dxo1fs2vcadu5" path="res://ExampleProject/2D/icon.png" id="2"]
 
 [sub_resource type="Gradient" id="3"]
 offsets = PackedFloat32Array(0)

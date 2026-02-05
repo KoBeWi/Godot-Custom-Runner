@@ -7,6 +7,9 @@ const _DATA_ENV = "__custom_runner_data__"
 static var _runtime_data: Dictionary
 
 var _click_position: Vector2
+var _camera_transform_3d: Transform3D
+var _camera_position_projected_to_ground: Vector3
+var _camera_yaw: float
 
 signal _add_variable(variable: String, value: Variant)
 
@@ -29,6 +32,21 @@ func _get_game_scene(for_scene: Node) -> String:
 func get_click_position() -> Vector2:
 	return _click_position
 
+## Returns the transform of 3D viewport camera at the time when the shortcut was pressed or when the toolbar button was clicked.
+## Returns Transform3D.IDENTITY if the camera transform couldn't be determined.
+func get_camera_transform_3d() -> Transform3D:
+	return _camera_transform_3d
+
+## Returns the position of 3D viewport camera - projected to the ground, using ray cast in the Vector3.DOWN direction with length defined in "addons/custom_runner/ray_distance" - at the time when the shortcut was pressed or when the toolbar button was clicked.
+## Returns Vector3.ZERO if the camera position couldn't be determined.
+func get_camera_position_projected_to_ground() -> Vector3:
+	return _camera_position_projected_to_ground
+
+## Returns the yaw of 3D viewport camera at the time when the shortcut was pressed or when the toolbar button was clicked.
+## Returns 0.0 if the camera yaw couldn't be determined.
+func get_camera_yaw() -> float:
+	return _camera_yaw
+
 ## Returns true if the game was ran via CustomRunner.
 static func is_custom_running() -> bool:
 	return not OS.get_environment(_DATA_ENV).is_empty()
@@ -46,5 +64,5 @@ func add_variable(variable: String, value: Variant) -> void:
 	if value is Object:
 		push_error("The value can't be an Object.")
 		return
-	
+
 	_add_variable.emit(variable, value)

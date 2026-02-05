@@ -6,12 +6,17 @@ Best explained with a video probably:
 
 As you can see, a typical "level" scene is currently open, but a special context menu option runs a "game" scene instead and loads the level. The "player" icon spawns at the cursor position from the editor.
 
+Additionally, in 3D scenes you can also start the game at current camera location as shown in the video below:
+
+![](Media/ReadmeExample3D.webp)
+
 This is basically it. The CustomRunner will run a specific scene in your project and pass some data from the editor to the game (using magic). You can then use the data to e.g. load a level or place the player at the cursor position, so you can easier test your stuff.
 
 ### Running
 
 You can invoke Custom Runner in two ways:
 - Using the context menu option in the 2D editor. It only appears when CustomRunner can run that scene.
+- Using the toolbar button "Play from current camera location".
 - Pressing the Play Custom Scene shortcut (default F7).
 - Pressing the Replay Custom Scene (default Shift+F7).
 
@@ -35,6 +40,9 @@ Example implementation:
 ```GDScript
 func _gather_variables(scene: Node):
 	add_variable("mouse_pos", get_click_position()) # Add current cursor position.
+	add_variable("camera_3d_xform", get_camera_transform_3d()) # Add camera 3d transform
+	add_variable("start_position", get_camera_position_projected_to_ground()) # Add camera 3d transform projected to ground
+	add_variable("start_yaw", get_camera_yaw()) # Add camera yaw (rotation around Y axis)
 ```
 (`get_click_position()` is a special method that you can use to get cursor position in 2D editor)
 

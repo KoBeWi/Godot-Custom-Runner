@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dq67w5vfsonic"]
+
+[ext_resource type="Script" uid="uid://cwn4qux8mswtr" path="res://ExampleProject/2D/Level2D.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dxo1fs2vcadu5" path="res://ExampleProject/2D/icon.png" id="2"]
+
+[node name="Level1" type="Node2D" unique_id=1174744697]
+script = ExtResource("1")
+
+[node name="Label" type="Label" parent="." unique_id=367779797]
+modulate = Color(0, 1, 0.0627451, 1)
+offset_left = 39.0
+offset_top = 405.0
+offset_right = 81.0
+offset_bottom = 419.0
+text = "Level1"
+
+[node name="Ground" type="Sprite2D" parent="." unique_id=227472008]
+modulate = Color(0, 1, 0.203922, 1)
+position = Vector2(442, 504)
+scale = Vector2(13.2031, 2.14063)
+texture = ExtResource("2")
