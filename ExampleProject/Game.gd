@@ -11,6 +11,6 @@ func _ready():
 			$Player.position = pos
 		elif level is Level3D:
 			var player = load("res://ExampleProject/3D/ThirdPersonPlayer.tscn").instantiate() as Node3D
-			player.transform.origin = CustomRunner.get_variable("start_position")
-			player.rotation.y = CustomRunner.get_variable("start_yaw")
+			player.transform.origin = CustomRunner.get_variable("camera_3d_position")
+			player.rotation.y = CustomRunner.get_variable("camera_3d_yaw")
 			level.add_child(player)

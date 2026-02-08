@@ -11,29 +11,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: addons/CustomRunner/Plugin.gd:26
+#: addons/CustomRunner/Plugin.gd:24
 msgid "Play Custom Scene"
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:27
+#: addons/CustomRunner/Plugin.gd:25
 msgid "Replay Custom Scene"
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:33
-msgid "Play from current camera location (%s)"
-msgstr ""
-
-#: addons/CustomRunner/Plugin.gd:116
+#: addons/CustomRunner/Plugin.gd:99
 msgid "CustomRunner: Can't replay scene before running it normally at least once."
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:121
+#: addons/CustomRunner/Plugin.gd:104
 msgid "CustomRunner: Invalid scene to play."
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:178
+#: addons/CustomRunner/Plugin.gd:160
 msgid "Play Here"
-msgstr ""
-
-msgid "Plugin Example"
 msgstr ""

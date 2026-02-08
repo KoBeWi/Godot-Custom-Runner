@@ -64,5 +64,5 @@ func add_variable(variable: String, value: Variant) -> void:
 	if value is Object:
 		push_error("The value can't be an Object.")
 		return
-
+	
 	_add_variable.emit(variable, value)
