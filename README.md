@@ -6,7 +6,7 @@ Best explained with a video probably:
 
 As you can see, a typical "level" scene is currently open, but a special context menu option runs a "game" scene instead and loads the level. The "player" icon spawns at the cursor position from the editor.
 
-Additionally, in 3D scenes you can also start the game at current camera location as shown in the video below:
+3D scenes don't have built-in context menu, but shortcuts still work as shown in the video example below: 
 
 ![](Media/ReadmeExample3D.webp)
 
@@ -16,7 +16,6 @@ This is basically it. The CustomRunner will run a specific scene in your project
 
 You can invoke Custom Runner in two ways:
 - Using the context menu option in the 2D editor. It only appears when CustomRunner can run that scene.
-- Using the toolbar button "Play from current camera location".
 - Pressing the Play Custom Scene shortcut (default F7).
 - Pressing the Replay Custom Scene (default Shift+F7).
 
@@ -40,11 +39,12 @@ Example implementation:
 ```GDScript
 func _gather_variables(scene: Node):
 	add_variable("mouse_pos", get_click_position()) # Add current cursor position.
+	add_variable("mouse_pos_3d", get_mouse_position_3d()) # Add current cursor position in 3D scene
 	add_variable("camera_3d_xform", get_camera_transform_3d()) # Add camera 3d transform
-	add_variable("start_position", get_camera_position_projected_to_ground()) # Add camera 3d transform projected to ground
-	add_variable("start_yaw", get_camera_yaw()) # Add camera yaw (rotation around Y axis)
+	add_variable("camera_3d_yaw", get_camera_yaw()) # Add camera yaw (rotation around Y axis, in radians)
 ```
-(`get_click_position()` is a special method that you can use to get cursor position in 2D editor)
+
+`get_click_position()`, `get_mouse_position_3d()`, `get_camera_transform_3d()`, `get_camera_yaw()` are special methods that you can use to access cursor and camera data at the time when shortcut was pressed, or context-menu option selected.
 
 `func _get_game_scene(for_scene: Node) -> String:` - Return the UID/path of the main scene you want to use. Typically, there's a "game" scene in the project, which then loads a level scene and adds it as a child. If you don't have such scene, return empty string (the runner will just run the currently opened scene). Example implementation:
 ```GDScript

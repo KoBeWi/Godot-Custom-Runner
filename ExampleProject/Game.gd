@@ -7,10 +7,12 @@ func _ready():
 		add_child(level)
 
 		if level is Level2D:
-			var pos = CustomRunner.get_variable("mouse_pos")
-			$Player.position = pos
+			var player = Sprite2D.new()
+			player.texture = load("res://ExampleProject/2D/icon.png")
+			player.position = CustomRunner.get_variable("mouse_pos")
+			level.add_child(player)
 		elif level is Level3D:
 			var player = load("res://ExampleProject/3D/ThirdPersonPlayer.tscn").instantiate() as Node3D
-			player.transform.origin = CustomRunner.get_variable("camera_3d_position")
+			player.transform.origin = CustomRunner.get_variable("mouse_pos_3d")
 			player.rotation.y = CustomRunner.get_variable("camera_3d_yaw")
 			level.add_child(player)

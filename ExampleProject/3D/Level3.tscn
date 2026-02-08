@@ -4,8 +4,20 @@
 
 [sub_resource type="Environment" id="Environment_bn56w"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3t3de"]
-albedo_color = Color(0.2975, 0.51, 0.255, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nvhya"]
+albedo_color = Color(0.29803923, 0.50980395, 0.25490198, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4570o"]
+albedo_color = Color(0.5177639, 0.44482923, 0.13417199, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfyy2"]
+albedo_color = Color(0.23604396, 0.3700482, 0.9548331, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gw2vr"]
+albedo_color = Color(0.7747533, 0.22236317, 0.16898328, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y10h7"]
+albedo_color = Color(7.2196127e-07, 0.5017568, 0.59247255, 1)
 
 [node name="Level3D" type="Node3D" unique_id=1363245526]
 script = ExtResource("1_nvhya")
@@ -18,22 +30,26 @@ transform = Transform3D(0.83336383, -0.20533723, 0.51316786, -0.2564876, 0.67875
 shadow_enabled = true
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1330868796]
-material_override = SubResource("StandardMaterial3D_3t3de")
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=999993666]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 size = Vector3(30, 0.1, 30)
+material = SubResource("StandardMaterial3D_nvhya")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=290694449]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
+material = SubResource("StandardMaterial3D_4570o")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1945812150]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 size = Vector3(1, 1, 10)
+material = SubResource("StandardMaterial3D_qfyy2")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1935078781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3)
+material = SubResource("StandardMaterial3D_gw2vr")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1846030155]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
+material = SubResource("StandardMaterial3D_y10h7")

@@ -8,8 +8,8 @@ static var _runtime_data: Dictionary
 
 var _click_position: Vector2
 var _camera_transform_3d: Transform3D
-var _camera_position_projected_to_ground: Vector3
 var _camera_yaw: float
+var _mouse_position_3d: Vector3
 
 signal _add_variable(variable: String, value: Variant)
 
@@ -32,20 +32,22 @@ func _get_game_scene(for_scene: Node) -> String:
 func get_click_position() -> Vector2:
 	return _click_position
 
-## Returns the transform of 3D viewport camera at the time when the shortcut was pressed or when the toolbar button was clicked.
+## Returns the transform of 3D viewport camera at the time when the shortcut was pressed.
 ## Returns Transform3D.IDENTITY if the camera transform couldn't be determined.
 func get_camera_transform_3d() -> Transform3D:
 	return _camera_transform_3d
 
-## Returns the position of 3D viewport camera - projected to the ground, using ray cast in the Vector3.DOWN direction with length defined in "addons/custom_runner/ray_distance" - at the time when the shortcut was pressed or when the toolbar button was clicked.
-## Returns Vector3.ZERO if the camera position couldn't be determined.
-func get_camera_position_projected_to_ground() -> Vector3:
-	return _camera_position_projected_to_ground
-
-## Returns the yaw of 3D viewport camera at the time when the shortcut was pressed or when the toolbar button was clicked.
+## Returns the yaw (in radians) of 3D viewport camera at the time when the shortcut was pressed.
 ## Returns 0.0 if the camera yaw couldn't be determined.
 func get_camera_yaw() -> float:
 	return _camera_yaw
+
+## Returns where, in the 3D space the mouse was pointing at the time when the shortcut was pressed.
+## This is determined by projecting mouse position on the viewport camera, and tracing along the normal direction. Trace distance is configurable using the following setting: "addons/custom_runner/ray_distance".
+## Returns viewport camera position if the trace hadn't hit anything.
+## Returns Vector3.ZERO if Camera3D was not found.
+func get_mouse_position_3d() -> Vector3:
+	return _mouse_position_3d
 
 ## Returns true if the game was ran via CustomRunner.
 static func is_custom_running() -> bool:

@@ -36,6 +36,6 @@ msgstr ""
 msgid "CustomRunner: Invalid scene to play."
 msgstr "CustomRunner: Nieprawidłowa scena."
 
-#: addons/CustomRunner/Plugin.gd:160
+#: addons/CustomRunner/Plugin.gd:161
 msgid "Play Here"
 msgstr "Uruchom tutaj"
