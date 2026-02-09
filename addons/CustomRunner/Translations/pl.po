@@ -17,25 +17,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
 
-#: addons/CustomRunner/Plugin.gd:24
+#: addons/CustomRunner/Plugin.gd:21
 msgid "Play Custom Scene"
 msgstr "Zagraj własną scenę"
 
-#: addons/CustomRunner/Plugin.gd:25
+#: addons/CustomRunner/Plugin.gd:22
 msgid "Replay Custom Scene"
 msgstr "Zagraj ponownie własną scenę"
 
-#: addons/CustomRunner/Plugin.gd:99
+#: addons/CustomRunner/Plugin.gd:95
 msgid ""
 "CustomRunner: Can't replay scene before running it normally at least once."
 msgstr ""
 "CustomRunner: Nie można uruchomić ponownie sceny bez uruchomienia jej "
 "normalnie chociaż raz."
 
-#: addons/CustomRunner/Plugin.gd:104
+#: addons/CustomRunner/Plugin.gd:100
 msgid "CustomRunner: Invalid scene to play."
 msgstr "CustomRunner: Nieprawidłowa scena."
 
-#: addons/CustomRunner/Plugin.gd:161
+#: addons/CustomRunner/Plugin.gd:128
 msgid "Play Here"
 msgstr "Uruchom tutaj"

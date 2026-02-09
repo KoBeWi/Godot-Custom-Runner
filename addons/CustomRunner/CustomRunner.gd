@@ -43,9 +43,8 @@ func get_camera_yaw() -> float:
 	return _camera_yaw
 
 ## Returns where, in the 3D space the mouse was pointing at the time when the shortcut was pressed.
-## This is determined by projecting mouse position on the viewport camera, and tracing along the normal direction. Trace distance is configurable using the following setting: "addons/custom_runner/ray_distance".
-## Returns viewport camera position if the trace hadn't hit anything.
-## Returns Vector3.ZERO if Camera3D was not found.
+## This is determined by projecting mouse position on the viewport camera, and tracing along the normal direction. Trace distance is configurable using the following project setting: "addons/custom_runner/ray_distance".
+## Returns Vector3.ZERO if Camera3D was not found or if the trace hadn't hit anything.
 func get_mouse_position_3d() -> Vector3:
 	return _mouse_position_3d
 

@@ -11,22 +11,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: addons/CustomRunner/Plugin.gd:24
+#: addons/CustomRunner/Plugin.gd:21
 msgid "Play Custom Scene"
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:25
+#: addons/CustomRunner/Plugin.gd:22
 msgid "Replay Custom Scene"
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:99
+#: addons/CustomRunner/Plugin.gd:95
 msgid "CustomRunner: Can't replay scene before running it normally at least once."
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:104
+#: addons/CustomRunner/Plugin.gd:100
 msgid "CustomRunner: Invalid scene to play."
 msgstr ""
 
-#: addons/CustomRunner/Plugin.gd:161
+#: addons/CustomRunner/Plugin.gd:128
 msgid "Play Here"
 msgstr ""
