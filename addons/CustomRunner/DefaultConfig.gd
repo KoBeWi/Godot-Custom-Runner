@@ -7,7 +7,6 @@ func _gather_variables(scene: Node):
 	add_variable("mouse_pos", get_click_position())
 	add_variable("mouse_pos_3d", get_mouse_position_3d())
 	add_variable("camera_3d_xform", get_camera_transform_3d())
-	add_variable("camera_3d_yaw", get_camera_yaw())
 
 func _get_game_scene(for_scene: Node) -> String:
 	return ""

@@ -131,7 +131,6 @@ func update_camera_and_mouse_3d_transform() -> void:
 
 	if not is_instance_valid(camera):
 		runner._camera_transform_3d = Transform3D.IDENTITY
-		runner._camera_yaw = 0.0
 		runner._mouse_position_3d = Vector3.ZERO
 		return
 
@@ -150,7 +149,6 @@ func update_camera_and_mouse_3d_transform() -> void:
 		.intersect_ray(ray_parameters)
 
 	runner._camera_transform_3d = xform
-	runner._camera_yaw = xform.basis.get_euler().y
 	runner._mouse_position_3d = Vector3.ZERO if ray_result.is_empty() else ray_result["position"]
 
 class ContextMenuPlugin extends EditorContextMenuPlugin:
