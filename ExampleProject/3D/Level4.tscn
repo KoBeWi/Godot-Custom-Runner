@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://danehp8l48wwm"]
+
+[ext_resource type="Script" uid="uid://day12fopqr1f4" path="res://ExampleProject/3D/Level3D.gd" id="1_gvpkt"]
+
+[sub_resource type="Environment" id="Environment_bn56w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvpkt"]
+albedo_color = Color(0.56078434, 0.43529412, 0.27058825, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s6psh"]
+albedo_color = Color(0.32412198, 0.5280521, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j52wp"]
+albedo_color = Color(0.5587396, 0.37294155, 0.6439777, 1)
+
+[node name="Level3D" type="Node3D" unique_id=1363245526]
+script = ExtResource("1_gvpkt")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1196317726]
+environment = SubResource("Environment_bn56w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1356590371]
+transform = Transform3D(0.83336383, -0.20533723, 0.51316786, -0.2564876, 0.678753, 0.6881195, -0.4896108, -0.7050751, 0.51298183, 0, 5.5065207, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1330868796]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=999993666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+size = Vector3(30, 0.1, 30)
+material = SubResource("StandardMaterial3D_gvpkt")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1945812150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+size = Vector3(1, 1, 10)
+material = SubResource("StandardMaterial3D_s6psh")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1935078781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 0)
+size = Vector3(1, 5, 1)
+material = SubResource("StandardMaterial3D_j52wp")

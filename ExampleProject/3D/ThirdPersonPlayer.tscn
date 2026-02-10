@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cflawbm11wd16"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4t75n"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4t75n"]
+
+[node name="ThirdPersonPlayer" type="Node3D" unique_id=976493476]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1739584452]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1653054081]
+transform = Transform3D(-4.371139e-08, -0.25881904, 0.9659258, 0, 0.9659258, 0.25881904, -1, 1.131334e-08, -4.222196e-08, 4.5, 3, -6.556709e-08)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=149192880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_4t75n")
+
+[node name="Body" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=955446660]
+mesh = SubResource("CapsuleMesh_4t75n")
+
+[node name="Label3D" type="Label3D" parent="CharacterBody3D/CollisionShape3D/Body" unique_id=1204924022]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.7, 0.5, 0)
+text = "That's my back"
+
+[node name="Head" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D" unique_id=1382317222]
+transform = Transform3D(-1.7484554e-08, -0.39999998, 0, 0.39999998, -1.7484554e-08, 0, 0, 0, 0.39999998, -0.3, 0.39999998, 0)
+mesh = SubResource("CapsuleMesh_4t75n")

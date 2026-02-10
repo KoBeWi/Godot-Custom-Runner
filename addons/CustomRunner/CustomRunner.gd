@@ -7,6 +7,8 @@ const _DATA_ENV = "__custom_runner_data__"
 static var _runtime_data: Dictionary
 
 var _click_position: Vector2
+var _camera_transform_3d: Transform3D
+var _mouse_position_3d: Vector3
 
 signal _add_variable(variable: String, value: Variant)
 
@@ -28,6 +30,18 @@ func _get_game_scene(for_scene: Node) -> String:
 ## Returns infinite vector if the position couldn't be determined.
 func get_click_position() -> Vector2:
 	return _click_position
+
+## Returns the transform of 3D viewport camera at the time when the shortcut was pressed.
+## Returns Transform3D.IDENTITY if the camera transform couldn't be determined.
+## In most 3D projects you're probably going to be interested in camera yaw: [code]xform.basis.get_euler().y[/code] and / or position: [code]xform.origin[/code].
+func get_camera_transform_3d() -> Transform3D:
+	return _camera_transform_3d
+
+## Returns where, in the 3D space the mouse was pointing at the time when the shortcut was pressed.
+## This is determined by projecting mouse position on the viewport camera, and tracing along the normal direction. Trace distance is configurable using the following project setting: "addons/custom_runner/ray_distance".
+## Returns Vector3.ZERO if Camera3D was not found or if the trace hadn't hit anything.
+func get_mouse_position_3d() -> Vector3:
+	return _mouse_position_3d
 
 ## Returns true if the game was ran via CustomRunner.
 static func is_custom_running() -> bool:

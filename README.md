@@ -6,6 +6,10 @@ Best explained with a video probably:
 
 As you can see, a typical "level" scene is currently open, but a special context menu option runs a "game" scene instead and loads the level. The "player" icon spawns at the cursor position from the editor.
 
+3D scenes don't have built-in context menu, but shortcuts still work as shown in the video example below: 
+
+![](Media/ReadmeExample3D.webp)
+
 This is basically it. The CustomRunner will run a specific scene in your project and pass some data from the editor to the game (using magic). You can then use the data to e.g. load a level or place the player at the cursor position, so you can easier test your stuff.
 
 ### Running
@@ -35,8 +39,11 @@ Example implementation:
 ```GDScript
 func _gather_variables(scene: Node):
 	add_variable("mouse_pos", get_click_position()) # Add current cursor position.
+	add_variable("mouse_pos_3d", get_mouse_position_3d()) # Add current cursor position in 3D scene
+	add_variable("camera_3d_xform", get_camera_transform_3d()) # Add camera 3d transform
 ```
-(`get_click_position()` is a special method that you can use to get cursor position in 2D editor)
+
+`get_click_position()`, `get_mouse_position_3d()`, `get_camera_transform_3d()` are special methods that you can use to access cursor and camera data at the time when shortcut was pressed, or context-menu option selected.
 
 `func _get_game_scene(for_scene: Node) -> String:` - Return the UID/path of the main scene you want to use. Typically, there's a "game" scene in the project, which then loads a level scene and adds it as a child. If you don't have such scene, return empty string (the runner will just run the currently opened scene). Example implementation:
 ```GDScript

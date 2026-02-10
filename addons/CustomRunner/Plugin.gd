@@ -7,6 +7,7 @@ const PLAY_SHORTCUT = "custom_runner/play"
 const REPLAY_SHORTCUT = "custom_runner/replay_last"
 const CONFIG_SETTING = "addons/custom_runner/config_script"
 const DEFAULT_CONFIG = "uid://cotrfsbbe2ngp"
+const RAY_DISTANCE_SETTING = "addons/custom_runner/ray_distance"
 
 var runner: CustomRunner
 var data: Dictionary
@@ -30,6 +31,7 @@ func _enter_tree():
 		extensions.append("*.%s;Script File" % ext)
 	
 	define_project_setting(CONFIG_SETTING, DEFAULT_CONFIG, PROPERTY_HINT_FILE_PATH, ",".join(extensions))
+	define_project_setting(RAY_DISTANCE_SETTING, 100.0, PROPERTY_HINT_RANGE, "1.0,500.0,1.0")
 	track_project_setting(CONFIG_SETTING)
 	
 	load_runner()
@@ -84,6 +86,7 @@ func _shortcut_input(event: InputEvent) -> void:
 	
 	if EditorInterface.get_editor_settings().is_shortcut(PLAY_SHORTCUT, k):
 		update_click_position()
+		update_camera_and_mouse_3d_transform()
 		play_scene(false)
 		get_viewport().set_input_as_handled()
 	elif EditorInterface.get_editor_settings().is_shortcut(REPLAY_SHORTCUT, k):
@@ -120,6 +123,33 @@ func update_click_position() -> void:
 		runner._click_position = EditorInterface.get_edited_scene_root().get_global_mouse_position()
 	else:
 		runner._click_position = Vector2.INF
+
+func update_camera_and_mouse_3d_transform() -> void:
+	var ray_distance = ProjectSettings.get_setting(RAY_DISTANCE_SETTING)
+	var viewport := EditorInterface.get_editor_viewport_3d()
+	var camera := viewport.get_camera_3d()
+
+	if not is_instance_valid(camera):
+		runner._camera_transform_3d = Transform3D.IDENTITY
+		runner._mouse_position_3d = Vector3.ZERO
+		return
+
+	var xform := camera.get_camera_transform()
+	var mouse_position := EditorInterface.get_editor_viewport_3d().get_mouse_position();
+
+	var ray_parameters := PhysicsRayQueryParameters3D.new();
+	ray_parameters.collide_with_areas = true
+	ray_parameters.collide_with_bodies = true
+	ray_parameters.from = camera.project_position(mouse_position, 0.0)
+	ray_parameters.to = camera.project_position(mouse_position, ray_distance)
+
+	var ray_result := viewport \
+		.find_world_3d() \
+		.direct_space_state \
+		.intersect_ray(ray_parameters)
+
+	runner._camera_transform_3d = xform
+	runner._mouse_position_3d = Vector3.ZERO if ray_result.is_empty() else ray_result["position"]
 
 class ContextMenuPlugin extends EditorContextMenuPlugin:
 	var plugin: EditorPlugin
