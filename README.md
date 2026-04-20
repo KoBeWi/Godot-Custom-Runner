@@ -80,8 +80,8 @@ The CustomRunner class also comes with a documentation for its methods.
 
 ___
 
- The plugin works well with my [Metroidvania System](https://github.com/KoBeWi/Metroidvania-System) addon:
-![](https://github.com/KoBeWi/Metroidvania-System/raw/master/Media/GameCustomRunner.gif)
+The plugin works well with my [Metroidvania System](https://github.com/KoBeWi/Metroidvania-System) addon:
+![](https://github.com/KoBeWi/Metroidvania-System/wiki/Media/GameCustomRunner.gif)
 The integration guide is included in the README.
 
 ___
