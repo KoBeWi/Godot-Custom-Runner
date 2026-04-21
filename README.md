@@ -49,13 +49,13 @@ func _gather_variables(scene: Node):
 ```GDScript
 func _get_game_scene(for_scene: Node) -> String:
 	return "res://Scenes/Game.tscn"
- ```
- 
- With the example code above, pressing the run shortcut when you have a scene opened that has Level root node will run `Game.tscn` scene and pass `scene` variable with file path of your level and `mouse_pos` with cursor position at the time of running. This is what happens in the video above.
+```
 
- The shortcuts mentioned before can be configured in Editor Settings' Shortcuts tab, under Custom Runner group.
- 
- ### Retrieving the data
+With the example code above, pressing the run shortcut when you have a scene opened that has Level root node will run `Game.tscn` scene and pass `scene` variable with file path of your level and `mouse_pos` with cursor position at the time of running. This is what happens in the video above.
+
+The shortcuts mentioned before can be configured in Editor Settings' Shortcuts tab, under Custom Runner group.
+
+### Retrieving the data
  
 There are 2 static methods to interact with the plugin from within the game:
 `is_custom_running()` - Returns true if the game was launched using the plugin.
@@ -77,6 +77,10 @@ func _ready():
 The repository includes an example project, used in the video at the beginning. You can use it to test the plugin in action and as a reference for configuring it.
 
 The CustomRunner class also comes with a documentation for its methods.
+
+## Localization
+
+The addon supports translations and will automatically use the editor's language, if available. Currently only Polish translation is available. To make a new translation use the `Template.pot` file found in the addon's folder and feel free to open a pull request.
 
 ___
 
